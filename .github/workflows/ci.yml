@@ -38,6 +38,7 @@ jobs:
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version: '1.27'
+          check-latest: true # newest 1.27.x, not the runner's cached patch: govulncheck flags stdlib CVEs by patch level
           cache-dependency-path: go.sum # module + build cache: tidy/vet/govulncheck without re-downloading
       - name: go.mod tidy, gofmt, vet
         run: |
