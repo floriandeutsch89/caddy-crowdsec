@@ -3,7 +3,7 @@
 # by Dependabot) instead of resolved by xcaddy at build time.
 
 # Builder runs natively and cross-compiles (pure Go), so arm64 needs no QEMU here.
-FROM --platform=$BUILDPLATFORM golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d AS builder
+FROM --platform=$BUILDPLATFORM golang:1.27-alpine@sha256:b8c9b82affbbb82a020bbcf998dad2ba9516944ac7e883524642a481a9505e9c AS builder
 WORKDIR /src
 COPY go.mod go.sum ./
 RUN --mount=type=cache,target=/go/pkg/mod \
@@ -20,7 +20,8 @@ RUN --mount=type=cache,target=/go/pkg/mod \
 FROM caddy:2.11.7-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
 # Fixed non-root UID; group 0 with g=u so arbitrary UIDs (OpenShift, always GID 0)
 # can write too. Volumes from the root-running stock image need a one-time chown (README).
-RUN addgroup -S -g 10001 caddy \
+RUN apk upgrade --no-cache \
+ && addgroup -S -g 10001 caddy \
  && adduser -S -D -H -u 10001 -G caddy -h /data caddy \
  && mkdir -p /var/log/caddy \
  && chown -R 10001:0 /data /config /var/log/caddy \
