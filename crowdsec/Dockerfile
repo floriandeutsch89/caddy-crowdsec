@@ -1,6 +1,6 @@
 # CrowdSec for the Caddy stack: collections and log acquisition baked in, so
 # compose needs no CrowdSec config beyond the bouncer key.
-FROM crowdsecurity/crowdsec:v1.8.1@sha256:0f2523fa61ef507f15d953045cface490cc880670c62f2755ced17524107f71a
+FROM crowdsecurity/crowdsec:v1.8.2@sha256:65b74942f7e7ed5c60fde4ac15fc4ba715904c398c8b16dd451f4907d90347d4
 # caddy: log parser + HTTP scenarios (probing, crawling, brute force, CVE probes).
 # whitelist-good-actors: never ban well-known bots, CDNs and DNS resolvers.
 # appsec-*: WAF rules (known CVEs, generic attacks) for the AppSec component.
