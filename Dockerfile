@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/go/pkg/mod \
 
 # Runtime base only supplies the filesystem layout (Caddyfile, mime types, CA
 # certs, XDG env); the binary is ours, so its tag may lag go.mod briefly.
-FROM caddy:2.11.7-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
+FROM caddy:2.11.8-alpine@sha256:f6228111e5fafa1a5238258d0858e103f10599b8d1659a146e7726681a002bb9
 # Fixed non-root UID; group 0 with g=u so arbitrary UIDs (OpenShift, always GID 0)
 # can write too. Volumes from the root-running stock image need a one-time chown (README).
 RUN apk upgrade --no-cache \
